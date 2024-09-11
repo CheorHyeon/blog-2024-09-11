@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Link from "next/link";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -21,7 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${pretendard.variable}`}>
-      <body className={pretendard.className}>{children}</body>
+      <body className={pretendard.className}>
+        <div className="flex gap-3">
+          <Link href="/">메인</Link>
+          <Link href="/about">자기소개</Link>
+        </div>
+        <hr />
+        {children}
+      </body>
     </html>
   );
 }
