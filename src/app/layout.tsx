@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import Link from "next/link";
 import "./globals.css";
 
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
 const pretendard = localFont({
   src: "./../../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",
   display: "swap",
