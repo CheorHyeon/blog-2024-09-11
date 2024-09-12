@@ -44,9 +44,9 @@ export default function PostPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="p-4">
-      <h1 className="text-5xl font-bold">{post.title}</h1>
+      <h1 className="prose text-5xl font-bold">{post.title}</h1>
       <div
-        className="max-width max-w-full my-10"
+        className="prose max-width max-w-full my-10"
         dangerouslySetInnerHTML={{ __html: html_text.toString() }}
       ></div>
     </div>
