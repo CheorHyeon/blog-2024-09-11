@@ -1,35 +1,35 @@
-"use client";
-
-import { useState } from "react";
 import { posts } from "../../../../data/posts";
 
 import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
+import rehypePrettyCode from "rehype-pretty-code";
 
 // 최초 자동 실행
-export default function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({ params }: { params: { id: string } }) {
   // useState : 인스턴스 변수, date에 값을 Date 타입이거나 undefined 타입
   // 인스턴스 변수의 경우 최초에는 괄호 값되지만
   // 날짜 선택 시 setDate함수 실행되면서 date에 값이 할당되고, 함수를 다시 실행시켜 전체 다시 그려줌
   // UI와 관련된곳에 useState사용
-
-  // 구조 분해 할당 : useState는 배열로 응답, date와 setDate를 추출
-  const [date, setDate] = useState<Date | undefined>();
   const id = parseInt(params.id);
 
   const post = posts[id];
 
-  const html_text = unified()
+  const html_text = await unified()
     // Markdown -> AST 변경
     .use(markdown)
     // AST -> HTML AST
     .use(remark2rehype)
+    // 코드 블록 하이라이터 테마 지정
+    .use(rehypePrettyCode, {
+      theme: "github-dark",
+      grid: true,
+    })
     // HTML AST -> 문자열 형태 HTML
     .use(html)
     // 변환된 HTML 문자열 반환
-    .processSync(post.content);
+    .process(post.content);
 
   // 일반 변수의 문제
   // 1. 값이 바뀌어도 당연하게 관련 UI 갱신되지 않는다.
