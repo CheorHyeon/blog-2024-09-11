@@ -5,18 +5,15 @@ import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
+import PostDetail from "./PostDetail";
 
 // 최초 자동 실행
 export default async function PostPage({ params }: { params: { id: string } }) {
-  // useState : 인스턴스 변수, date에 값을 Date 타입이거나 undefined 타입
-  // 인스턴스 변수의 경우 최초에는 괄호 값되지만
-  // 날짜 선택 시 setDate함수 실행되면서 date에 값이 할당되고, 함수를 다시 실행시켜 전체 다시 그려줌
-  // UI와 관련된곳에 useState사용
   const id = parseInt(params.id);
 
   const post = posts[id];
 
-  const html_text = await unified()
+  const htmlText = await unified()
     // Markdown -> AST 변경
     .use(markdown)
     // AST -> HTML AST
@@ -45,10 +42,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
   return (
     <div className="p-4">
       <h1 className="prose text-5xl font-bold">{post.title}</h1>
-      <div
-        className="prose max-width max-w-full my-10"
-        dangerouslySetInnerHTML={{ __html: html_text.toString() }}
-      ></div>
+      <PostDetail html={htmlText.toString()}></PostDetail>
     </div>
   );
 }
