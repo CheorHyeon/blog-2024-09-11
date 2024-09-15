@@ -1,5 +1,4 @@
-type Post = { id: number; title: string; content: string };
-
+import { Post } from "@/types/post";
 // 인덱스 시그니처 : java DTO 사용과 유사, Post 타입 안정성 보장
 export const posts: { [key: number]: Post } = {
   3: {

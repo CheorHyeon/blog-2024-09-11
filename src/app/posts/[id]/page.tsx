@@ -1,4 +1,4 @@
-import { posts } from "../../../../data/posts";
+import { posts } from "@/../data/posts";
 
 import { unified } from "unified";
 import markdown from "remark-parse";
@@ -39,10 +39,5 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
   // 리액트에서 중괄호 ({}) 가 자바스크립트 객체를 출력할 수 있게 해줌
 
-  return (
-    <div className="p-4">
-      <h1 className="prose text-5xl font-bold">{post.title}</h1>
-      <PostDetail html={htmlText.toString()}></PostDetail>
-    </div>
-  );
+  return <PostDetail post={post} html={htmlText.toString()}></PostDetail>;
 }
