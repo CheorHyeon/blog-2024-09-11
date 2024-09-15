@@ -5,10 +5,14 @@ import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
-import PostDetail from "./PostDetail";
+import PostDetailBody from "./PostDetailBody";
 
 // 최초 자동 실행
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostDetail({
+  params,
+}: {
+  params: { id: string };
+}) {
   const id = parseInt(params.id);
 
   const post = posts[id];
@@ -39,5 +43,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
   // 리액트에서 중괄호 ({}) 가 자바스크립트 객체를 출력할 수 있게 해줌
 
-  return <PostDetail post={post} html={htmlText.toString()}></PostDetail>;
+  return (
+    <PostDetailBody post={post} html={htmlText.toString()}></PostDetailBody>
+  );
 }
