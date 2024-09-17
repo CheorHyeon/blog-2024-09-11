@@ -1,17 +1,27 @@
 "use client";
 
 import { LocaleCalendar } from "@/components/customUi/locale-calendar";
-import React from "react";
+import { useState } from "react";
 import { Post } from "@/types/post";
-
+import { genTOCId } from "@/lib/posts";
 export default function PostDetail({
   post,
   html,
 }: {
   post: Post;
-  html: String;
+  html: string;
 }) {
-  const [date, setDate] = React.useState<Date | undefined>();
+  const [date, setDate] = useState<Date | undefined>();
+
+  // HTML에 ID 설정
+  const setHeadingIds = (html: string) => {
+    return html.replace(/<(h[1-4])>(.*?)<\/\1>/g, (match, tag, content) => {
+      const id = genTOCId(content);
+      return `<${tag} id="${id}">${content}</${tag}>`;
+    });
+  };
+
+  const modifiedHtml = setHeadingIds(html); // ID가 설정된 HTML
 
   return (
     <div className="p-4">
@@ -31,7 +41,7 @@ export default function PostDetail({
       </h1>
 
       <div className="prose max-width max-w-full my-10">
-        <div dangerouslySetInnerHTML={{ __html: html }}></div>
+        <div dangerouslySetInnerHTML={{ __html: modifiedHtml }}></div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
 import PostDetailBody from "./PostDetailBody";
+import { TocSidebar } from "@/app/posts/[id]/TocSidebar";
 
 // 최초 자동 실행
 export default async function PostDetail({
@@ -44,6 +45,13 @@ export default async function PostDetail({
   // 리액트에서 중괄호 ({}) 가 자바스크립트 객체를 출력할 수 있게 해줌
 
   return (
-    <PostDetailBody post={post} html={htmlText.toString()}></PostDetailBody>
+    <div className="flex">
+      <div className="w-4/5">
+        <PostDetailBody post={post} html={htmlText.toString()} />
+      </div>
+      <div className="w-1/5">
+        <TocSidebar html={htmlText.toString()} />
+      </div>
+    </div>
   );
 }
