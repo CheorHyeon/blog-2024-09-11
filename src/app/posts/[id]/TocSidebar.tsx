@@ -46,23 +46,31 @@ export const TocSidebar = ({ html }: { html: string }) => {
   const activeIdList = useHeadingsObserver("h1, h2, h3, h4");
 
   return (
-    <ul className="fixed bg-white border border-gray-300 shadow-md p-4">
-      {headings.map((item) => {
-        const isIntersecting = activeIdList.includes(item.link);
-        const marginClass = getMarginClass(item.indent);
-        return (
-          <li
-            key={item.link}
-            className={cn(
-              isIntersecting && "text-large text-pink-600",
-              marginClass
-            )}
-          >
-            <Link href={item.link}>{item.text}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="fixed top-[30%] flex flex-col gap-2 py-4 px-3">
+      <ul className="bg-white border border-gray-300 shadow-md p-4">
+        {headings.map((item) => {
+          const isIntersecting = activeIdList.includes(item.link);
+          const marginClass = getMarginClass(item.indent);
+          return (
+            <li
+              key={item.link}
+              className={cn(
+                isIntersecting && "text-large text-pink-600",
+                marginClass
+              )}
+            >
+              <Link href={item.link}>{item.text}</Link>
+            </li>
+          );
+        })}
+      </ul>
+      <button
+        onClick={toTop}
+        className="bg-blue-500 text-white p-2 rounded shadow text-center"
+      >
+        맨 위로 가기
+      </button>
+    </div>
   );
 };
 
@@ -79,4 +87,8 @@ const getMarginClass = (indent: number) => {
     default:
       return ""; // No margin for indent level 0
   }
+};
+
+const toTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };

@@ -45,7 +45,7 @@ export default async function PostDetail({
   // 리액트에서 중괄호 ({}) 가 자바스크립트 객체를 출력할 수 있게 해줌
 
   return (
-    <div className="flex">
+    <div className="flex justify-center items-center">
       <div className="w-4/5">
         <PostDetailBody post={post} html={htmlText.toString()} />
       </div>
