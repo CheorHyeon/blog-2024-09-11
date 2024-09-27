@@ -1,6 +1,34 @@
 import { Post, RawPost } from "@/types/post";
 // 인덱스 시그니처 : java DTO 사용과 유사, Post 타입 안정성 보장
 const rawPosts: { [key: number]: RawPost } = {
+  12: {
+    id: 12,
+    title: "제목 8",
+    subTitle: "부제목 8",
+    content: "",
+    tag : "#React #Vue #Angular #C 프로그래밍"
+  },
+  11: {
+    id: 11,
+    title: "제목 11",
+    subTitle: "부제목 11",
+    content: "",
+    tag : "#React #Vue #Angular #C 프로그래밍"
+  },
+  10: {
+    id: 10,
+    title: "제목 10",
+    subTitle: "부제목 10",
+    content: "",
+    tag : "#React #Vue #Angular #C 프로그래밍"
+  },
+  9: {
+    id: 9,
+    title: "제목 9",
+    subTitle: "부제목 9",
+    content: "",
+    tag : "#React #Vue #Angular #C 프로그래밍"
+  },
   8: {
     id: 8,
     title: "제목 8",
