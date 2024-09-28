@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { genTOCId } from "@/lib/posts";
 import { useHeadingsObserver } from "@/hook/useHeadingsObserver";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +26,7 @@ export const TocSidebar = ({ html }: { html: string }) => {
     const newHeadings = headingElements.map((heading) => {
       const text = heading.textContent || ""; // textContent로 텍스트 추출
       const level = parseInt(heading.tagName[1], 10); // H1은 1, H2는 2 등
-      const link = "#" + genTOCId(text);
+      const link = "#" + heading.id;
 
       return {
         text,

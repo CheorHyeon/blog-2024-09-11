@@ -4,6 +4,7 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
+import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import PostDetailBody from "./PostDetailBody";
 import { TocSidebar } from "@/app/posts/[id]/TocSidebar";
@@ -24,6 +25,8 @@ export default async function PostDetail({
     .use(markdown)
     // AST -> HTML AST
     .use(remark2rehype)
+    // 헤드 태그에 id 추가
+    .use(rehypeSlug)
     // 코드 블록 하이라이터 테마 지정
     .use(rehypePrettyCode, {
       theme: "github-dark",
