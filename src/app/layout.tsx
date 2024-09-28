@@ -30,7 +30,7 @@ export default function RootLayout({
         <div className="flex gap-3">
           <Link href="/">메인</Link>
           <Link href="/about">자기소개</Link>
-          <Link href="/posts">글 목록</Link>
+          <a href="/posts">글 목록</a>
         </div>
         <hr />
         {children}
